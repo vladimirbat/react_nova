@@ -6,9 +6,10 @@
     <script src="js/react-dom.development.js"></script>
     <script src="js/babel.min.js"></script>
     <script type="text/babel">
-        let miNombre = "Alicia";
+        const apellidos = 'González';
+        const miNombre = `Alicia ${apellidos}`;
 		// ######### Reemplazar el literal "Pepe" por el contenido de la variable miNombre
-        let elemento = <h1>Ejemplo de Pepe</h1>;
+        const elemento = <h1>Ejemplo de {miNombre}</h1>;
 	    ReactDOM.render(elemento, document.getElementById('root'));    
     </script>
 </head>
