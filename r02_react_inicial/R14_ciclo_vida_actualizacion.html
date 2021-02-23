@@ -16,6 +16,7 @@
                 this.state = {date:new Date()};
             }
             componentWillMount(){
+                console.log('componentWillMount');
                 // ######### Justo antes de la primera renderización lanzamos la temporización cada 300ms.
                 // ######### guardar el número de temporizador en el atributo "t".
                 this.t = setInterval(

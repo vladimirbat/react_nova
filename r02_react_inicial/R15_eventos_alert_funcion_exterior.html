@@ -19,7 +19,7 @@
                 return  (
                     <div>
                         {/*########## asignar la función global saludar al evento click del botón*/}
-                        <button  >Saludar</button>
+                        <button onClick={saludar} >Saludar</button>
                         <Interior />
                     </div>
                 );
@@ -33,6 +33,7 @@
             console.log("this:",this);
             alert("Hola desde un evento");
         }
+        
         class Interior extends React.Component{
             render(){
                 console.log("Actualizado el interior");
