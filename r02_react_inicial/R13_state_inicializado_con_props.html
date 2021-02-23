@@ -17,7 +17,7 @@
                 // la semilla del atributo del state llamada
                 // veces (pero este luego cambiará)
                 // ######## Guardar en el state un atributo llamado "veces" con el valor recibido en el atributo "valorInicial" del objeto "props".
-                
+                this.state = {veces: this.props.valorInicial};
                 this.t = setInterval(
                     // Cambio de veces en el state.
                     ()=> this.setState({veces:this.state.veces-1}),
@@ -25,17 +25,19 @@
                 );
             }
             render(){
-                if(this.state.veces<=0){
+                const {veces} = this.state;
+                const {valorInicial} = this.props;
+                if(veces<=0){
                     clearInterval(this.t);
                 }
                 return  (
                     <div>
                         {/* ########### Mostrar dentro del div el valor de la variable "valorInicial" en lugar del literal*/}
                         <div className="ficha">
-                            Valor inicial: 6</div>
+                            Valor inicial: {valorInicial}</div>
                         {/* ########## Mostrar dentro del div el valor de la variable "veces" en lugar del literal*/}
                         <div className="ficha">
-                            Valor actual: 3</div>
+                            Valor actual: {veces}</div>
                     </div>
                 );
             }
