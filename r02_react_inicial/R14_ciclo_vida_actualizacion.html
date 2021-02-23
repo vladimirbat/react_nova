@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+        div.ficha{background-color:yellow;padding: 1em; margin: 1em auto;
+                width: 200px;}
+    </style>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script type="text/babel">
+        class Principal extends React.Component{
+            constructor(props){
+                super(props)
+                this.state = {date:new Date()};
+            }
+            componentWillMount(){
+                // ######### Justo antes de la primera renderización lanzamos la temporización cada 300ms.
+                // ######### guardar el número de temporizador en el atributo "t".
+
+            }
+            shouldComponentUpdate(nextProps, nextState){
+                // Si los segundos son iguales, retorna false
+                // indicando que no se debe re-renderizar.
+                // ########### solamente renderiza (retorna true) si los segundos han cambiado.
+                return true;
+            }
+            render(){
+                console.log(this.state.date.toLocaleTimeString());
+                return  (
+                    <div>
+                        {/* ############ Mostramos el toLocaleTimeString() del atributo "date" del "state" */}
+                        <div className="ficha">
+                        </div>
+                        <Interior />
+                    </div>
+                );
+            }
+            componentWillUnmount(){
+                clearInterval(this.t);
+            }
+        }
+        class Interior extends React.Component{
+            render(){
+                console.log("Actualizado");
+                return  <div>Componente interior</div>;
+            }
+        }
+	    ReactDOM.render(<Principal/>,document.getElementById('root'));     
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+
+</html>

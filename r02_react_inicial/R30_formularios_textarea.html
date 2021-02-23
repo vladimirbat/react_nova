@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+        div.ficha{background-color:yellow;padding: 1em; margin: 1em auto;
+                width: 400px;}
+        div.ficha p {padding: 1em;background-color:beige;}
+    </style>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script type="text/babel">
+        class Principal extends React.Component{
+            constructor(props){
+                super(props)
+                this.state = {comentario:'En un lugar de la Mancha...'};
+            }
+            render(){
+                return  (
+                    <div className="ficha">
+                       Comentario 
+                       {/* ######### asignar al "value" el contenido de "state.comentario"*/}
+                       {/* ######### asignar al evento "change" el método "cambio"*/}
+                       <textarea /> 
+                        <p>{this.state.comentario}</p>
+                        {/* ######### asignar al evento "click" el código que borre el comentario*/}
+                        <button >
+                            Borrar</button>
+                    </div>
+                );
+            }
+            cambio(event){
+                // ############ actualizar "comentario" en el state 
+                //      con el nuevo valor que procede de control textarea
+                
+            }
+        }
+    
+	    ReactDOM.render(<Principal/>,document.getElementById('root'));     
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+
+</html>

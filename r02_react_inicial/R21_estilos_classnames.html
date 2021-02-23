@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+        div.ficha{background-color:yellow;padding: 1em; margin: 1em auto;
+                width: 200px;}
+        p{padding: 1em;}
+        .color{background-color: darkkhaki;}
+        .grande{font-size: 32px;}
+        .borde{border:3px dashed darkcyan;}
+    </style>
+    <!-- ######### Importar la biblioteca classnames (classnames-index.js) -->
+    <script src="js/classnames-index.js"></script>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script type="text/babel">
+        class Principal extends React.Component{
+            constructor(props){
+                super(props)
+                this.clases ={
+                    color:false,
+                    grande:false,
+                    borde:false
+                };
+                // ########## Crear un objeto "classNames" con las clases de estilo declaradas en "this.clases"
+                //            y guardarlo en un atributo "clasesAplicadas" del state.
+                
+            }
+            render(){
+                return  (
+                    <div>
+                        <button onClick={()=> this.cambiarClase('color')}>
+                            Quitar/Poner color</button>
+                        <button onClick={()=> this.cambiarClase('grande')}>
+                            Quitar/Poner grande</button>
+                        <button onClick={()=> this.cambiarClase('borde')}>
+                            Quitar/Poner borde</button>
+                        <p className={this.state.clasesAplicadas}>
+                            En un lugar de la Mancha...</p>
+                    </div>
+                );
+            }
+            cambiarClase = (cual) =>{
+                this.clases[cual]= !this.clases[cual];
+                // ########## Actualizar el atributo "clasesAplicadas" del state
+                // con los cambios aplicados a "this.clases".
+                
+            }
+        }
+	    ReactDOM.render(<Principal/>,document.getElementById('root'));    
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+
+</html>

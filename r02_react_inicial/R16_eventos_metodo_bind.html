@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+        div.ficha{background-color:yellow;padding: 1em; margin: 1em auto;
+                width: 200px;}
+    </style>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script type="text/babel">
+        
+        class Principal extends React.Component{
+            constructor(props){
+                super(props)
+                this.state = {date:new Date()};
+                this.nombre = "Mi componente";
+            }
+            render(){
+                return  (
+                    <div>
+                        {/*########## Enlazar el evento click con el método saludar y que reciba el this del objeto (empleando bind)*/}
+                        <button  >Saludar</button>
+                        <Interior />
+                    </div>
+                );
+            }
+            saludar(event){
+                // Si no ponemos bind, this sería undefined.
+                console.log(this);
+                alert(this.nombre);
+            }
+        }
+        
+        class Interior extends React.Component{
+            render(){
+                console.log("Actualizado el interior");
+                return  (
+                    <div>Componente interior</div>
+                );
+            }
+        }
+	    ReactDOM.render(<Principal/>,document.getElementById('root'));    
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+
+</html>
