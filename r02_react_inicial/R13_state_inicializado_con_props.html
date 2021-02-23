@@ -20,7 +20,9 @@
                 
                 this.t = setInterval(
                     // Cambio de veces en el state.
-                    ()=> this.setState({veces:this.state.veces-1}),1000);
+                    ()=> this.setState({veces:this.state.veces-1}),
+                    1000
+                );
             }
             render(){
                 if(this.state.veces<=0){
@@ -39,7 +41,7 @@
             }
         }
 		// ############### Asignar el valor 10 a la propiedad "valorInicial" de la etiqueta "CuentaAtras"
-	    ReactDOM.render(<CuentaAtras />,document.getElementById('root'));     
+	    ReactDOM.render(<CuentaAtras valorInicial="10"/>,document.getElementById('root'));     
     </script>
 </head>
 <body>
