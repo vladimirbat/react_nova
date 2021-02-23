@@ -27,7 +27,7 @@
             mostrarHora = (event) =>{
                 // event implementa los atributos y métodos de la W3C.
                 // ########## Evitar que se navegue a donde indica le href del hipervínculo
-                
+                event.preventDefault();
                 this.setState({date:new Date()});
             }
         }

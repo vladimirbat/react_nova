@@ -14,14 +14,17 @@
                 class Principal extends React.Component{
             constructor(props){
                 super(props)
-                this.state = {date:new Date()};
+                this.state = {date:new Date(), veces: 0};
                 this.nombre = "Mi Componente";
             }
             render(){
+                const {veces} = this.state;
                 return  (
                     <div>
                         {/*########### asociar el evento click al método saludar creado con expresión Lambda*/}
-                        <button  >Saludar</button>
+                        <button onClick={this.saludar}>Saludar</button>
+                        <button onClick={(event)=>this.incrementar(event)}>Incrementar</button>
+                        <div>{veces}</div>
                         <Interior />
                     </div>
                 );
@@ -30,6 +33,9 @@
                 // Lambda no incluye "this", por lo tanto "this" se coge del entorno, es decir del objeton
                 console.log(this);
                 alert(this.nombre);
+            }
+            incrementar(event){
+               this.setState({veces: this.state.veces + 1});
             }
         }
         

@@ -14,15 +14,15 @@
         class Principal extends React.Component{
             constructor(props){
                 super(props)
-                this.estilo ={width:200,backgroundColor:'gold'};
-                this.state = {estilo:this.estilo};
+                this.state = {estilo:{width:200,backgroundColor:'gold'},temperatura:20};
             }
             render(){
+                const {estilo} = this.state; 
                 return  (
                     <div>
                         <button onClick={this.cambiarAncho}>Ensanchar</button>
                         {/*########## Asignar a la propiedad "style" de la etiqueta "p" el objeto JSON "estilo" del "state" */}
-                        <p >En un lugar de la Mancha...</p>
+                        <p style={estilo}>En un lugar de la Mancha...</p>
                     </div>
                 );
             }
@@ -30,12 +30,12 @@
                 // Copiamos this.estilo a un objeto nuevo
                 // para que no esté vigilado por this.state
                 // y así poder realizar cambios sobre él.
-                this.estilo = Object.assign({},this.estilo);
+                const estilo = {...this.state.estilo};
                 // Hacemos los cambios
-                this.estilo.width += 10;
+                estilo.width += 10;
 
                 // ######## Actualizar el objeto "stilo" del "state".
-                
+                this.setState({estilo})
             }
         }
 	    ReactDOM.render(<Principal/>,document.getElementById('root'));   
