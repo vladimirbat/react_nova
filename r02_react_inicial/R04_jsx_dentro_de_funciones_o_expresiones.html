@@ -15,19 +15,19 @@
         function imprimirFila(persona,i){
             if(i%2==0){
 				// ############ Retornar el JSX de un "div.par" que muestre en su interior el contenido de "persona"
-                return ;
+                return <div className="par">{persona}</div>;
             } else {
 				// ############ Retornar el JSX de un "div.impar" que muestre en su interior el contenido de "persona"
-                return ;
+                return <div className="impar">{persona}</div>;;
             }
         }
         let elemento = (
             <div>
 				{/*######### incluir el JSX que retorna "impimirFila" para cada uno de los elementos de la matriz "lista" */}
-                {imprimirFila(persona[0],0)}
-                {}
-                {}
-                {}
+                {imprimirFila(lista[0],0)}
+                {imprimirFila(lista[1],1)}
+                {imprimirFila(lista[2],2)}
+                {imprimirFila(lista[3],3)}
             </div>
         );
 	    ReactDOM.render(elemento,

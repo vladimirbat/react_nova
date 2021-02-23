@@ -15,12 +15,24 @@
         //                 <img  src="img/gato.png" alt="Mi casa" />
         //             </div>
         //  Donde el src de la imagen se tome del atributo "foto" inicializado en el constructor a "img/casa.gif".
-
+        class Ficha extends React.Component {
+            constructor(){
+                super();
+                this.foto = 'img/casa.gif';
+            }
+            render(){
+                const {foto} = this;
+                return (<div>
+                    <h1>Naturgato</h1>
+                    <img  src={foto} alt="Mi casa" />
+                </div>);
+            }
+        }
 		
 		
         
         // ######## 2.- insertar en root el componente declarado en el paso anterior
-	    
+	    ReactDOM.render(<Ficha/>, document.getElementById('root'));
     </script>
 </head>
 <body>
