@@ -13,7 +13,7 @@
             constructor(){
                 super();
                 // ########## incluir en el state un atributo "foto" que tome el valor "img/casa.gif"
-                
+                this.state= {foto:'img/casa.gif'};
                 setTimeout(()=>{this.cambiarFoto()},2000);
             }
             render(){
@@ -27,7 +27,7 @@
             }
             cambiarFoto(){
                 // ############## Cambiar el valor del atributo "foto" del state a "img/gato.png"
-                
+                this.setState({foto:'img/gato.png'});
             }
 
         }
