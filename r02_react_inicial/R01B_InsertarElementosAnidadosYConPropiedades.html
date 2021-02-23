@@ -10,9 +10,9 @@
     <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
     <script type="text/babel">
         // ########## Crear un elemento img con react que en su atributo src apunte a "img/gato.png"
-        let elementoImg ;
+        let elementoImg = React.createElement("img",    {src:"img/gato.png"}     );
         // ########## Crear un elemento h2 con react que contenga un texto y la imagen anterior"
-        let elementoH2 ;
+        let elementoH2 = React.createElement(   "h2",    {},   "Gato:" , elementoImg  );
 	    // ------ Inyección del h2 en el elmento con id="root"     
         ReactDOM.render(elementoH2,document.getElementById('root'));    
     </script>

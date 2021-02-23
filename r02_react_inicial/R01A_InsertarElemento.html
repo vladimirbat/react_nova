@@ -7,7 +7,9 @@
     <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
     <script type="text/babel">
 		// ########## Crear un elemento h2 con react que contenga el texto "Elemento creado con React"
-	    // ############ Injectar el elmento h2 en el elemento con id="root"  
+        const h2 = React.createElement('h2',{},'Elemento creado con React');
+	    // ############ Injectar el elmento h2 en el elemento con id="root"
+        ReactDOM.render(h2, document.querySelector('#root') );
     </script>
 </head>
 <body>
