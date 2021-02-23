@@ -7,7 +7,7 @@
                 width: 200px;}
         p{padding: 1em;}
         .color{background-color: darkkhaki;}
-        .grande{font-size: 32px;}
+        .grande{font-size: 4rem;}
         .borde{border:3px dashed darkcyan;}
     </style>
     <!-- ######### Importar la biblioteca classnames (classnames-index.js) -->
@@ -19,16 +19,13 @@
         class Principal extends React.Component{
             constructor(props){
                 super(props)
-                this.clases ={
-                    color:false,
-                    grande:false,
-                    borde:false
-                };
-                // ########## Crear un objeto "classNames" con las clases de estilo declaradas en "this.clases"
-                //            y guardarlo en un atributo "clasesAplicadas" del state.
+                // ########## guardar en el state una variable booleana por cada clase de estio que podamos poner o quitar.
+                this.state = { color:false, grande:false, borde:false};
                 
             }
             render(){
+                // ########## obtener del estado las variables booleanas que indican las clases a aplicar
+                const {color, grande, borde} = this.state;
                 return  (
                     <div>
                         <button onClick={()=> this.cambiarClase('color')}>
@@ -37,16 +34,16 @@
                             Quitar/Poner grande</button>
                         <button onClick={()=> this.cambiarClase('borde')}>
                             Quitar/Poner borde</button>
-                        <p className={this.state.clasesAplicadas}>
+                        <p className={classNames({color, grande, borde})}>
                             En un lugar de la Mancha...</p>
                     </div>
                 );
             }
             cambiarClase = (cual) =>{
-                this.clases[cual]= !this.clases[cual];
-                // ########## Actualizar el atributo "clasesAplicadas" del state
-                // con los cambios aplicados a "this.clases".
-                
+                // ########## Obtener copia del estado y conmutar la propiedad cuyo nombre recibimos como argumento
+                const estado = {...this.state}
+                estado[cual]= !estado[cual];
+                this.setState(estado);
             }
         }
 	    ReactDOM.render(<Principal/>,document.getElementById('root'));    
