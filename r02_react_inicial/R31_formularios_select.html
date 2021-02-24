@@ -15,27 +15,34 @@
             constructor(props){
                 super(props)
                 this.state = {dia:'miercoles'};
+                this.dias = {
+                    lunes: 'Lunes',
+                    martes: 'Martes',
+                    miercoles:'Miércoles',
+                    jueves: 'Jueves',
+                }
             }
             render(){
+                const {dia} = this.state;
+                const {dias} = this;
                 return  (
                     <div className="ficha">
                        Apellidos 
                        {/* ######### asignar al "value" el contenido de "state.dia"*/}
                        {/* ######### asignar al evento "change" el método "cambio"*/}
-                       <select >
-                                <option value="lunes">Lunes</option>
-                                <option value="martes">Martes</option>
-                                <option value="miercoles">Miércoles</option>
-                                <option value="jueves">Jueves</option>
+                       <select value={dia} onChange={this.cambio.bind(this)}>
+                            {Object.keys(dias).map(key=><option key={key} value={key}>{dias[key]}</option>)}
                         </select> 
-                        <p>{this.state.dia}</p>
+                        <p>{dias[dia]}</p>
                     </div>
                 );
             }
             cambio(event){
-                console.log("Dia:",event.target.value);
+                const {value} = event.target;
+                console.log("Dia:",value);
                 // ############ actualizar "dia" en el state 
                 //      con el nuevo valor que procede de control select
+                this.setState({dia:value})
                 
             }
         }
