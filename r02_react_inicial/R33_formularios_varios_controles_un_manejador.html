@@ -38,7 +38,15 @@
             }
             cambio(event){
                 const {name, value} = event.target;
+                // name='apellidos'
+                // value='garcia'
                 console.log("name:",name);
+                // this.setState({apellidos:'garcia'})
+                // ------ VERSIÓN CLÁSICA ----------------
+                // const nuevo ={};
+                // nuevo[name] = value; //nuevo['apellidos']= 'garcia';
+                // this.setState(nuevo);
+                // ------ VERSÍON ES6 --------------
                 this.setState({[name]:value});
             }
         }
