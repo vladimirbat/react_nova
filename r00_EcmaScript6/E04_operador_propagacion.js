@@ -14,7 +14,7 @@ console.log(c);
 
 const d = {x:10, y:20};
 const e = {y: 30, z:30}
-const f = {...d, ...e};
+const f = {...d, ...e, x:0, alpha:0.5};
 console.log(f); 
 
 const {x,y} = f;// Desestruturaación de variables
