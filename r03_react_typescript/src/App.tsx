@@ -1,6 +1,7 @@
 import React, { FC, Fragment } from 'react';
 import { ComponenteConUseEffect } from './components/ComponenteConUseEffect';
 import { ComponenteConUseEffectBuscador } from './components/ComponenteConUseEffectBuscador';
+import { ComponenteConUsePersonalizado } from './components/ComponenteConUsePersonalizado';
 import { ComponenteConUseRef } from './components/ComponenteConUseRef';
 import { ComponenteConUseState } from './components/ComponenteConUseState';
 
@@ -26,6 +27,9 @@ const App:FC<AppProps> = (props:AppProps) => {
       </div>
       <div className="row">
         <div className="column column-50 column-offset-25"><ComponenteConUseRef/></div>
+      </div>
+      <div className="row">
+        <div className="column column-50 column-offset-25"><ComponenteConUsePersonalizado/></div>
       </div>
       
     </Fragment>
