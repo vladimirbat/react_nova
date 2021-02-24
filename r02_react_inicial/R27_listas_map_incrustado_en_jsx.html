@@ -17,14 +17,17 @@
                 super(props)
                 var m = [{id:1,dia:"lunes"},{id:2,dia:"martes"},
                         {id:3,dia:"miércoles"},{id:4,dia:"jueves"}];
-                this.state = {m:m};
+                this.state = {m};
             }
             render(){
+                const {m} = this.state;
                 return  (
                     <div className="ficha">
 						{/* ############ Mediante un map, retornar una lista 
 								de párrafos JSX con los id y día de cada 
-                                elemento como key y contenido respectivamente*/}
+                                elemento como key y contenido respectivamente*/
+                            m.map(item => <p key={item.id}>{item.dia}</p>)
+                        }
                         
                     </div>
                 );

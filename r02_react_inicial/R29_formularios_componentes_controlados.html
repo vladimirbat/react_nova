@@ -18,13 +18,14 @@
             }
             render(){
                 console.log("--- render ----");
+                const {apellidos} = this.state;
                 return  (
                     <div className="ficha">
                        Apellidos 
                        {/* ######### asignar al "value" el contenido de "state.apellidos"*/}
                        {/* ######### asignar al evento "change" el método "cambio"*/}
-                       <input type="text" /> 
-                        <p>{this.state.apellidos}</p>
+                       <input type="text" value={apellidos} onChange={this.cambio.bind(this)}/> 
+                        <p>{apellidos}</p>
                     </div>
                 );
             }
@@ -32,6 +33,7 @@
                 console.log("Apellidos:",event.target.value);
                 // ############ actualizar "apellidos" en el state 
                 //      con el nuevo valor que procede de control input
+                this.setState({apellidos:event.target.value})
                 
             }
         }

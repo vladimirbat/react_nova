@@ -19,13 +19,14 @@
                         {id:3,dia:"miércoles"},{id:4,dia:"jueves"}];
 				// ######## Guardar en this.lista una matriz de elementos jsx de modo que cada 
                 //      contenga un parrafo con el día en su interior.        
-                
-                this.state = {lista:this.lista};
+                const lista = m.map(item => <p>{item.dia}</p>);
+                this.state = {lista};
             }
             render(){
+                const {lista} = this.state;
                 return  (
                     <div className="ficha">
-                        {this.state.lista}
+                        {lista}
                     </div>
                 );
             }

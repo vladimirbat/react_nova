@@ -17,16 +17,25 @@
                 super(props)
                 var m = [{id:1,dia:"lunes"},{id:2,dia:"martes"},
                         {id:3,dia:"miércoles"},{id:4,dia:"jueves"}];
-				// ###### Agregar a cáda párrafo el atributo key con el id del elemento i-esimo
-                this.lista = m.map((dato)=> <p>{dato.dia}</p>);
-                this.state = {lista:this.lista};
+				// ###### Agregar a cáda párrafo el atributo key con el id del elemento i-esimo       
+                const lista = m.map(item => <p key={item.id}>{item.dia}</p>);
+                this.state = {m, lista};
             }
             render(){
+                const {lista} = this.state;
                 return  (
                     <div className="ficha">
-                        {this.state.lista}
+                        {lista}
+                        <p><button onClick={this.cambiar.bind(this)}>Cambiar elemento</button></p>
                     </div>
+                    
                 );
+            }
+            cambiar(event){
+                const {m} = this.state;
+                m[1] = {id:2,dia:"domingo"};
+                const lista = m.map(item => <p key={item.id}>{item.dia}</p>);
+                this.setState({m, lista});
             }
         }
     
