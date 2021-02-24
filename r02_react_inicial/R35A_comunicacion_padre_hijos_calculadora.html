@@ -12,14 +12,14 @@
         class Principal extends React.Component{
             constructor(props){
                 super(props);
-                this.state = {};
+                this.state = {nombre1: 'valor 0'};
             }
             render(){
-                const {c1, c2} = this.state;
+                const {c1, c2, nombre1} = this.state;
                 const total = isNaN(c1 + c2) ? '': c1 + c2;
                 return (<div>
                     <div>
-                        <Calculadora nombreA="varlor 1" nombreB="valor 2" 
+                        <Calculadora nombreA={nombre1} nombreB="valor 2" 
                             onResultado={(resultado)=> this.setState({c1:resultado})}/>
                     </div>
                     <div>
@@ -29,6 +29,9 @@
                     <p>Total: {total}</p>
                 </div>);
             }
+            componentDidMount(){
+                setTimeout(()=>this.setState({nombre1:'valor 1'}),2000);
+            }
             
         }
         class Calculadora extends React.Component{
@@ -36,6 +39,14 @@
                 super(props);
                 this.state = {};
             }
+
+            componentDidUpdate(prevProps) {
+                // Comprobamos si nombreA ha cambiado
+                if (this.props.nombreA !== prevProps.nombreA) {
+                    console.log('Next Props ->',  prevProps.nombreA, this.props.nombreA);
+                }
+            }
+
             render(){
                 const {resultado} = this.state;
                 const {nombreA, nombreB} = this.props;
