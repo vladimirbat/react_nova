@@ -15,32 +15,31 @@
             constructor(props){
                 super(props)
                 this.state = {nombre:'',apellidos:''};
+                this.cambio = this.cambio.bind(this);
             }
             render(){
+                const {nombre, apellidos} = this.state;
                 return  (
                     <div className="ficha">
                         {/*######### Asignar el atributo name a los controles con el 
                                     nombre que queramos que aparezcan en el state*/}
                         Nombre 
-                        <input type="text" 
-                              value={this.state.nombre}
-                              onChange={this.cambio.bind(this)}/> <br/>
+                        <input type="text" name="nombre"
+                              value={nombre}
+                              onChange={this.cambio}/> <br/>
                         Apellidos 
-                        <input type="text" 
-                              value={this.state.apellidos}
-                              onChange={this.cambio.bind(this)}/> <br/>
+                        <input type="text" name="apellidos"
+                              value={apellidos}
+                              onChange={this.cambio}/> <br/>
                        
-                        <p>{this.state.nombre} {this.state.apellidos}</p>
+                        <p>{nombre} - {apellidos}</p>
                     </div>
                 );
             }
             cambio(event){
-                console.log("name:",event.target.name);
-                // ES5
-                // var nuevo = {};
-                // nuevo[event.target.name]=event.target.value;
-                // this.setState(nuevo);
-                this.setState({[event.target.name]:event.target.value});//ES6
+                const {name, value} = event.target;
+                console.log("name:",name);
+                this.setState({[name]:value});
             }
         }
     
