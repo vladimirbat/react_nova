@@ -17,19 +17,20 @@
                 this.state = {dias:['lunes','miercoles']};
             }
             render(){
+                const {dias} = this.state;
                 return  (
                     <div className="ficha">
                        Dias 
                        {/*########## asignar a "value" la matriz con los días seleccionados*/}
                        {/*########## asignar true a la propiedad "multiple" para permitir la selección múltiple*/}
-                       <select 
+                       <select value={dias} multiple={true}
                               onChange={this.cambio.bind(this)}>
                                 <option value="lunes">Lunes</option>
                                 <option value="martes">Martes</option>
                                 <option value="miercoles">Miércoles</option>
                                 <option value="jueves">Jueves</option>
                         </select> 
-                        <ul>{this.state.dias.map(dia=><li>{dia}</li>)}</ul>
+                        <ul>{this.state.dias.map(dia=><li key={dia}>{dia}</li>)}</ul>
                     </div>
                 );
             }
