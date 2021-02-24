@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, FormEvent, Fragment, useEffect, useState } from 'react';
 
-export const ComponenteConUseState:FC<{}> = () => {
+export const ComponenteConUseEffect:FC<{}> = () => {
     const [nombrePersona, setNombrePersona] = useState<string>('');
     const [lista, setLista] = useState<string[]>([]);
 
