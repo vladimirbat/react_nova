@@ -40,7 +40,7 @@ app.get("/personas", (req, res) => {
 app.get("/buscar", (req, res) => {
     // req -> información de la petición recibida
     // res -> información de la respuesta que vamos a enviar.
-    const {apellidos} = req.query;
+    const apellidos = req.query.apellidos.toLocaleLowerCase();
     res.setHeader("Content-Type", "application/json");
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 	res.header("Access-Control-Allow-Origin", "*");

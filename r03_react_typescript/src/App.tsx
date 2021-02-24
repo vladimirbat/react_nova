@@ -1,5 +1,6 @@
 import React, { FC, Fragment } from 'react';
 import { ComponenteConUseEffect } from './components/ComponenteConUseEffect';
+import { ComponenteConUseEffectBuscador } from './components/ComponenteConUseEffectBuscador';
 import { ComponenteConUseState } from './components/ComponenteConUseState';
 
 export type AppProps ={
@@ -19,6 +20,10 @@ const App:FC<AppProps> = (props:AppProps) => {
           <ComponenteConUseEffect />
         </div>
       </div>
+      <div className="row">
+        <div className="column column-50 column-offset-25"><ComponenteConUseEffectBuscador/></div>
+      </div>
+      
     </Fragment>
   );
 }
