@@ -17,31 +17,34 @@
                 this.state = {nombre:'',apellidos:''};
             }
             render(){
+                const {nombre, apellidos} = this.state;
                 return  (
                     <div className="ficha">
                         Nombre 
                         {/*########### Asignar mediante una expresión lamba en la propiedad
                                 "ref" la referencia al control a un atributo del 
                                 objeto llamado txtNombre */}
-                        <input type="text" 
+                        <input type="text" ref={control => this.txtNombre = control}
                               defaultValue="anonimo"
                               /> <br/>
                         Apellidos 
                          {/*########### Asignar mediante una expresión lamba en la propiedad
                                 "ref" la referencia al control a un atributo del 
                                 objeto llamado txtApellidos */}
-                        <input type="text"
+                        <input type="text" ref={control => this.txtApellidos = control}
                               /><br/>
                         <button onClick={this.leerControles.bind(this)}>
                             Leer controles</button>
-                        <p>{this.state.nombre} {this.state.apellidos}</p>
+                        <p>{nombre} - {apellidos}</p>
                     </div>
                 );
             }
             leerControles(event){
 			    // Lectura de los value de los controles cuyas referencias tenemos guardadas.
-                this.setState({nombre:this.txtNombre.value,
-                            apellidos:this.txtApellidos.value});
+                this.setState({
+                    nombre: this.txtNombre.value,
+                    apellidos: this.txtApellidos.value
+                });
             }
         }
     
