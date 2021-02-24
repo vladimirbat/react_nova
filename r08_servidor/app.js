@@ -5,8 +5,7 @@ var app = express();
 // Carpeta de archivos estáticos.
 app.use(express.static(__dirname));
 
-var bbdd = {
-    "personas": [
+const personas = [
         { "dni": 22, "nombre": "Daniel", "apellidos": "Valiente", "saldo": 834.777 },
         { "dni": 32, "nombre": "Sergio", "apellidos": "Valiente", "saldo": 245.888 },
         { "dni": 54, "nombre": "Laura", "apellidos": "Villanueva", "saldo": 265.333 },
@@ -23,21 +22,33 @@ var bbdd = {
         { "dni": 190, "nombre": "Gonzalo", "apellidos": "Lopez", "saldo": 564.333 },
         { "dni": 193, "nombre": "Antonio", "apellidos": "Martinez", "saldo": 664.333 },
         { "dni": 194, "nombre": "Pablo", "apellidos": "Martin", "saldo": 864.333 }
-    ]
-};
+    ];
 
 // ################# LISTADO DE PERSONAS ########################
-app.get("/personas", function (req, res) {
+app.get("/personas", (req, res) => {
     // req -> información de la petición recibida
     // res -> información de la respuesta que vamos a enviar.
     res.setHeader("Content-Type", "application/json");
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.send(bbdd.personas);
+    res.send(personas);
 });
 
-// ################# INICIO DEL SERVIDOR ########################
-app.listen(3020, function () {
-    console.log("Aplicación escuchando en el puerto 3020");
+// ################# LISTADO DE PERSONAS ########################
+// http://localhost:3020/buscar?apellidos=gar
+app.get("/buscar", (req, res) => {
+    // req -> información de la petición recibida
+    // res -> información de la respuesta que vamos a enviar.
+    const {apellidos} = req.query;
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    const resultado = personas.filter(p => p.apellidos.toLocaleLowerCase().indexOf(apellidos)>=0);
+    res.send(resultado);
 });
+
+
+// ################# INICIO DEL SERVIDOR ########################
+app.listen(3020, () => console.log("Aplicación escuchando en el puerto 3020"));
