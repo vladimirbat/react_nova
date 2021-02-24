@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import './App.css';
+import { ComponenteConUseState } from './components/ComponenteConUseState';
 
 export type AppProps ={
   titulo:string;
@@ -8,10 +9,13 @@ export type AppProps ={
 const App:FC<AppProps> = (props:AppProps) => {
   const {titulo} = props;
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>{titulo}</p>
-      </header>
+    <div className="container">
+      <h1>{titulo}</h1>
+      <div className="row">
+        <div className="column column-50 column-offset-25">
+          <ComponenteConUseState />
+        </div>
+      </div>
     </div>
   );
 }
