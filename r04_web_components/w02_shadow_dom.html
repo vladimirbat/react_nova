@@ -9,9 +9,8 @@
         div.pagina{
             padding: 2.5rem;
         }
-        #marco1 div.marco1 { /* No conseguimos entrar en el Web component*/
+        #marco1>#shadow-root>div.marco1{ /* No conseguimos entrar en el Web component*/
             padding: 1,5rem;
-            color:greenyellow
         }
         p{
             border: 1px solid black;
@@ -74,7 +73,7 @@
     <div class="pagina">
         <h1>Shadow DOM</h1>
         <marco1-util id="marco1"></marco1-util>
-        <marco2-util id="marco2"></marco1-util>
+        <marco2-util id="marco2"></marco2-util>
     </div>
 </body>
 </html>
