@@ -15,6 +15,12 @@
         p{
             border: 1px solid black;
         }
+        #marco3{
+            --marco-color-fondo: pink;
+        }
+        :root{
+            --marco-color: navy;
+        }
         
     </style>
     
@@ -57,6 +63,27 @@
         }
         customElements.define('marco2-util',Marco2Util);
         
+        // ############ Marco3 Shadow Open ##################3
+        class Marco3Util extends HTMLElement{
+            constructor(){
+                super();
+            }
+            connectedCallback(){
+                const shadowRoot = this.attachShadow({mode:'open'});
+                const div = document.createElement('div');
+                div.textContent = 'marco 3';
+                div.className = 'marco3';
+                shadowRoot.appendChild(div);
+                const style = document.createElement('style');
+                style.textContent = `div.marco3 {
+                    background-color: var(--marco-color-fondo, cyan); 
+                    color: var(--marco-color, black); 
+                }`;
+                shadowRoot.appendChild(style);
+            }
+            
+        }
+        customElements.define('marco3-util',Marco3Util);
 
         // ############ Inicialización ##################3
         document.addEventListener('DOMContentLoaded',()=>{
@@ -74,6 +101,8 @@
         <h1>Shadow DOM</h1>
         <marco1-util id="marco1"></marco1-util>
         <marco2-util id="marco2"></marco2-util>
+        <marco3-util id="marco3"></marco3-util>
+        <marco3-util id="marco33"></marco3-util>
     </div>
 </body>
 </html>
