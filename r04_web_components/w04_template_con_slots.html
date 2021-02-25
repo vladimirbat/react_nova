@@ -24,7 +24,11 @@
                 const fragment = content.cloneNode(true);
                 fragment.querySelector('.full').style.display = 'none';
                 fragment.querySelector('#btnOcultarModal').addEventListener('click', ()=>{
-                    this.show(false)
+                    this.show(false);
+                    // Creamos un evento de tipo 'cerrado' con un dato dentro de la variable 'detail'.
+                    const event = new CustomEvent('cerrado',{detail:Math.round(100*Math.random())});
+                    // El Custom Element (this) lanza un evento de tipo 'cerrado'.
+                    this.dispatchEvent(event);
                 });
                 this.shadow.appendChild(fragment);
             }
@@ -39,6 +43,14 @@
 
         // ############ Inicialización ##################3
         document.addEventListener('DOMContentLoaded',()=>{
+            let contador = 0;
+            // Me suscribo al evento 'cerrado' que lanza el Custom Element 'modal-util'.
+            document.querySelector('modal-util').addEventListener('cerrado',(event)=>{
+                // En la variable detail recibimos datos enviados por el Custom Element en este evento.
+                console.log('Cerrado con el número: ', event.detail);
+                contador++;
+                document.querySelector('#contador').textContent = `Modal cerrada ${contador} veces`;
+            })
             document.querySelector('#btnMostrarModal').addEventListener('click',(event)=>{
                 document.querySelector('modal-util').show(true);
             })
@@ -88,7 +100,7 @@
             <div slot="slot-titulo">Don quijote</div>
             <div slot="slot-contenido">En un lugar de la mancha</div>
         </modal-util>
-        
+        <div id="contador"></div>
     </div>
 </body>
 </html>
