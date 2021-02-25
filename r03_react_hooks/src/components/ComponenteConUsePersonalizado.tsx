@@ -17,7 +17,6 @@ export const ComponenteConUsePersonalizado:FC<{}> = () => {
         <div>
             {mostrar && <img src="gato.png" alt="gato"/>}
         </div>
-        
     </Fragment>;
 }
 
