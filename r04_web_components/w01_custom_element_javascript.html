@@ -5,16 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Element con JS</title>
+    <style>
+        div.pagina{
+            padding: 2.5rem;
+        }
+    </style>
     <script>
+        // ############ Custom Element Reloj ##################3
         class RelojUtil extends HTMLElement{
             constructor(){
                 super();
+                this.insertado = false;
             }
             connectedCallback(){
-                const div = document.createElement('div');
-                div.textContent = this.getHora();
-                this.appendChild(div);
-                setInterval(()=> div.textContent = this.getHora(), 1000);
+                if(!this.insertado) {
+                    this.insertado = true;
+                    const div = document.createElement('div');
+                    div.textContent = this.getHora();
+                    this.appendChild(div);
+                    setInterval(()=> div.textContent = this.getHora(), 1000);
+                }
             }
             getHora(){
                 const date = new Date();
@@ -23,10 +33,59 @@
         }
 
         customElements.define('reloj-util',RelojUtil);
+
+        // ############ Custom Element Sumador ##################3
+        class SumadorUtil extends HTMLElement{
+            constructor(){
+                super();
+                this.insertado = false;
+            }
+            connectedCallback(){
+                if(!this.insertado) {
+                    this.insertado = true;
+                    const div = document.createElement('div');
+                    div.id = 'resultado'
+                    div.textContent = this.getContent();
+                    this.appendChild(div);
+                }
+            }
+            getContent(){
+                const a = parseFloat(this.getAttribute('a'));
+                const b = parseFloat(this.getAttribute('b'));
+                const c = a + b;
+                return `${a} + ${b} = ${c}`;
+            }
+            // Indicamos que atributos se deben monitorizar para tenerlos en cuenta cuando cambien
+            static get observedAttributes(){
+                return ['a','b'];
+            }
+            // Se ejectua cada vez que cambia uno de los atributos de entrada monitorizados
+            attributeChangedCallback(attrName, oldValue, newValue){
+                if(oldValue!=null){
+                    this.firstChild.textContent = this.getContent();
+                }
+            }
+        }
+
+        customElements.define('sumador-util',SumadorUtil);
+
+        document.addEventListener('DOMContentLoaded',()=>{
+            setInterval(()=>{
+                const nuevo = Math.round(100*Math.random());
+                document.querySelector('#sumador-dinamico').setAttribute('a', nuevo);
+            },5000);
+        });
     </script>
 </head>
 <body>
-    <h1>Custom Element: Reloj</h1>
-    <reloj-util></reloj-util>
+    <div class="pagina">
+        <h1>Custom Element: Reloj</h1>
+        <reloj-util></reloj-util>
+        <hr/>
+        <sumador-util a="4" b="3"></sumador-util>
+        <hr/>
+        <sumador-util id="sumador-dinamico" a="5" b="8"></sumador-util>
+    </div>
+
 </body>
 </html>
