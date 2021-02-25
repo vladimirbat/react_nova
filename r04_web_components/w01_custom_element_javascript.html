@@ -9,6 +9,9 @@
         div.pagina{
             padding: 2.5rem;
         }
+        p{
+            border: 1px solid black;
+        }
     </style>
     <script>
         // ############ Custom Element Reloj ##################3
@@ -68,6 +71,55 @@
 
         customElements.define('sumador-util',SumadorUtil);
 
+        // ############ Custom Element que hereda de Parrafo ##################3
+        class ParrafoUtil extends HTMLParagraphElement{
+            constructor(){
+                super();
+                this.insertado = false;
+            }
+            connectedCallback(){
+                if(!this.insertado) {
+                    this.insertado = true;
+                    const elementos = this.textContent.split(' ');
+                    const spans = elementos.map((elemento)=> {
+                        const span = document.createElement('span');
+                        span.textContent = elemento;
+                        return span;
+                    })
+                    this.innerHTML = '';
+                    spans.forEach(span => {
+                        span.addEventListener('click',this.quitarSpan);
+                        this.appendChild(span);
+                        this.appendChild(document.createElement('br'));
+                    });
+                    const link = document.createElement('link');
+                    link.setAttribute('rel', 'stylesheet');
+                    link.setAttribute('type', 'text/css');
+                    link.setAttribute('href', './w01_estilos.css');
+                    this.appendChild(link);
+                }
+            }
+            quitarSpan(event){
+                const span = event.currentTarget;
+                span.parentNode.removeChild(span.nextSibling);
+                span.parentNode.removeChild(span);
+            }
+            
+            // Indicamos que atributos se deben monitorizar para tenerlos en cuenta cuando cambien
+            static get observedAttributes(){
+                return [];
+            }
+            // Se ejectua cada vez que cambia uno de los atributos de entrada monitorizados
+            attributeChangedCallback(attrName, oldValue, newValue){
+                if(oldValue!=null){
+                    
+                }
+            }
+        }
+
+        customElements.define('parrafo-util',ParrafoUtil, { extends: 'p' });
+
+        // ############ Inicialización ##################3
         document.addEventListener('DOMContentLoaded',()=>{
             setInterval(()=>{
                 const nuevo = Math.round(100*Math.random());
@@ -84,6 +136,8 @@
         <sumador-util a="4" b="3"></sumador-util>
         <hr/>
         <sumador-util id="sumador-dinamico" a="5" b="8"></sumador-util>
+        <hr/>
+        <p is="parrafo-util">Uno dos tres</p>
     </div>
 
 </body>
