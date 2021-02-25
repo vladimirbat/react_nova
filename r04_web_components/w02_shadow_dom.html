@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Element con JS</title>
+    <style>
+        div.pagina{
+            padding: 2.5rem;
+        }
+        #marco1 div.marco1 { /* No conseguimos entrar en el Web component*/
+            padding: 1,5rem;
+            color:greenyellow
+        }
+        p{
+            border: 1px solid black;
+        }
+        
+    </style>
+    
+    <script>
+        // ############ Marco1 Shadow Open ##################3
+        class Marco1Util extends HTMLElement{
+            constructor(){
+                super();
+            }
+            connectedCallback(){
+                const shadowRoot = this.attachShadow({mode:'open'});
+                const div = document.createElement('div');
+                div.textContent = 'marco 1';
+                div.className = 'marco1';
+                this.shadowRoot.appendChild(div);
+                const style = document.createElement('style');
+                style.textContent = `div.marco1 {background-color: darksalmon; }`;
+                this.shadowRoot.appendChild(style);
+            }
+            
+        }
+        customElements.define('marco1-util',Marco1Util);
+
+        // ############ Marco2 Shadow Open ##################3
+        class Marco2Util extends HTMLElement{
+            constructor(){
+                super();
+            }
+            connectedCallback(){
+                const shadowRoot = this.attachShadow({mode:'closed'});
+                const div = document.createElement('div');
+                div.textContent = 'marco 2';
+                div.className = 'marco2';
+                shadowRoot.appendChild(div);
+                const style = document.createElement('style');
+                style.textContent = `div.marco2 {background-color: greenyellow; }`;
+                shadowRoot.appendChild(style);
+            }
+            
+        }
+        customElements.define('marco2-util',Marco2Util);
+        
+
+        // ############ Inicialización ##################3
+        document.addEventListener('DOMContentLoaded',()=>{
+            const marco1 = document.querySelector('#marco1');
+            // Como el marco1 está 'open', desde fuera, mediante JS puedo acceder a su interior.
+            marco1.shadowRoot.querySelector('div.marco1').style.color = 'navy';
+            const marco2 = document.querySelector('#marco2');
+            // Como el marco2 está 'closed', desde fuera, mediante JS, NO puedo  acceder a su interior. (lo comentamos para que no de error)
+            // marco2.shadowRoot.querySelector('div.marco2').style.color = 'navy';
+        });
+    </script>
+</head>
+<body>
+    <div class="pagina">
+        <h1>Shadow DOM</h1>
+        <marco1-util id="marco1"></marco1-util>
+        <marco2-util id="marco2"></marco1-util>
+    </div>
+</body>
+</html>
