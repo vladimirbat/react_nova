@@ -13,63 +13,81 @@
     
     <script>
         // ############ Custom Element que usa una plantilla ##################3
-        class TablaUtil extends HTMLElement{
+        class ModalUtil extends HTMLElement{
             constructor(){
                 super();
             }
             connectedCallback(){
-                const shadowRoot = this.attachShadow({mode:'closed'});
-                const plantilla = document.querySelector('#plantilla-tabla');
+                this.shadow = this.attachShadow({mode:'closed'});
+                const plantilla = document.querySelector('#plantilla-modal');
                 const content = plantilla.content;
                 const fragment = content.cloneNode(true);
-                const items = JSON.parse(this.getAttribute('items'));
-                const tbody =fragment.querySelector('tbody')
-                const tr = tbody.querySelector('tr')
-                const filas = items.map(item => {
-                    const trClone = tr.cloneNode(true);
-                    trClone.querySelector('td').textContent = item;
-                    return trClone;
+                fragment.querySelector('.full').style.display = 'none';
+                fragment.querySelector('#btnOcultarModal').addEventListener('click', ()=>{
+                    this.show(false)
                 });
-                tbody.removeChild(tr);
-                filas.forEach(fila => {
-                    tbody.appendChild(fila);
-                });
-                shadowRoot.appendChild(fragment);
+                this.shadow.appendChild(fragment);
+            }
+            show(mostrar) {
+                this.shadow.querySelector('.full').style.display = mostrar? 'block': 'none';
             }
             
         }
-        customElements.define('tabla-util', TablaUtil);
+        customElements.define('modal-util', ModalUtil);
 
        
 
         // ############ Inicialización ##################3
         document.addEventListener('DOMContentLoaded',()=>{
-            
+            document.querySelector('#btnMostrarModal').addEventListener('click',(event)=>{
+                document.querySelector('modal-util').show(true);
+            })
         });
     </script>
 </head>
 <body>
-    <template id="plantilla-tabla">
+    <template id="plantilla-modal">
         <style>
-            table {border-collapse: collapse;}
-            td, th {border:1px solid black; padding: 0.5rem 1rem;}
+            div.full {
+                position: fixed;
+                left:0px; top:0px; right: 0px; bottom: 0px;
+                background-color: rgba(100,100,100,0.6);
+            }
+            div.modal {
+                margin: 3rem auto;
+                min-height: 300px;
+                
+                width: 50%;
+                background-color: white;
+            }
+            div.titulo {
+                color: white;
+                background-color: teal;
+                padding: 0.6rem 2rem;
+            }
+            div.contenido {
+                padding: 2rem;
+            }
         </style>
-        <table>
-            <thead>
-                <tr>
-                    <th>Columna 1</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Hola</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="full">
+            <div class="modal">
+                <div class="titulo">
+                    <slot name="slot-titulo">Titulo por defecto</slot>
+                </div>
+                <div class="contenido">
+                    <slot name="slot-contenido">contenido por defecto</slot>
+                    <button id="btnOcultarModal">Aceptar</button>
+                </div>
+            </div>
+        </div>
     </template>
     <div class="pagina">
         <h1>Templates</h1>
-        <tabla-util items='["Lunes","Martes","Miercoles"]'></tabla-util>
+        <button id="btnMostrarModal">Mostrar modal</button>
+        <modal-util>
+            <div slot="slot-titulo">Don quijote</div>
+            <div slot="slot-contenido">En un lugar de la mancha</div>
+        </modal-util>
         
     </div>
 </body>
