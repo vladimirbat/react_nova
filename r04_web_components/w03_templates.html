@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Element con JS</title>
+    <style>
+        div.pagina{
+            padding: 2.5rem;
+        }
+    </style>
+    
+    <script>
+        // ############ Custom Element que usa una plantilla ##################3
+        class TablaUtil extends HTMLElement{
+            constructor(){
+                super();
+            }
+            connectedCallback(){
+                const shadowRoot = this.attachShadow({mode:'closed'});
+                const plantilla = document.querySelector('#plantilla-tabla');
+                const content = plantilla.content;
+                const fragment = content.cloneNode(true);
+                const items = JSON.parse(this.getAttribute('items'));
+                const tbody =fragment.querySelector('tbody')
+                const tr = tbody.querySelector('tr')
+                const filas = items.map(item => {
+                    const trClone = tr.cloneNode(true);
+                    trClone.querySelector('td').textContent = item;
+                    return trClone;
+                });
+                tbody.removeChild(tr);
+                filas.forEach(fila => {
+                    tbody.appendChild(fila);
+                });
+                shadowRoot.appendChild(fragment);
+            }
+            
+        }
+        customElements.define('tabla-util', TablaUtil);
+
+       
+
+        // ############ Inicialización ##################3
+        document.addEventListener('DOMContentLoaded',()=>{
+            
+        });
+    </script>
+</head>
+<body>
+    <template id="plantilla-tabla">
+        <style>
+            table {border-collapse: collapse;}
+            td, th {border:1px solid black; padding: 0.5rem 1rem;}
+        </style>
+        <table>
+            <thead>
+                <tr>
+                    <th>Columna 1</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Hola</td>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+    <div class="pagina">
+        <h1>Templates</h1>
+        <tabla-util items='["Lunes","Martes","Miercoles"]'></tabla-util>
+        
+    </div>
+</body>
+</html>
